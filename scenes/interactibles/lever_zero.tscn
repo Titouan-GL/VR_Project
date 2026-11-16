@@ -1,0 +1,108 @@
+[gd_scene format=3 uid="uid://cll4pk3kuuq1"]
+
+[ext_resource type="Script" uid="uid://c8gx2wc7hsxf5" path="res://addons/godot-xr-tools/interactables/interactable_hinge.gd" id="2"]
+[ext_resource type="Script" uid="uid://cy83e1txea1ek" path="res://addons/godot-xr-tools/interactables/interactable_hinge_origin.gd" id="2_2fa64"]
+[ext_resource type="Script" uid="uid://dlojnwxo25bky" path="res://addons/godot-xr-tools/interactables/interactable_handle.gd" id="4"]
+[ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="4_lu2nr"]
+[ext_resource type="Animation" uid="uid://db62hs5s4n2b3" path="res://addons/godot-xr-tools/hands/animations/left/Grip 4.res" id="5_qs41c"]
+[ext_resource type="Script" uid="uid://dvobm6vcfnqe8" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="6_nyol8"]
+[ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="7_xbqs6"]
+[ext_resource type="Animation" uid="uid://d1xnpyc08njjx" path="res://addons/godot-xr-tools/hands/animations/right/Grip 4.res" id="8_otwuk"]
+[ext_resource type="PackedScene" uid="uid://ca3daqmpo0tua" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.tscn" id="10_23ntw"]
+
+[sub_resource type="BoxShape3D" id="1"]
+size = Vector3(0.2, 0.6, 0.1)
+
+[sub_resource type="BoxMesh" id="2"]
+size = Vector3(0.2, 0.6, 0.1)
+
+[sub_resource type="BoxShape3D" id="3"]
+size = Vector3(0.04, 0.04, 0.2)
+
+[sub_resource type="SphereShape3D" id="4"]
+radius = 0.06
+
+[sub_resource type="BoxMesh" id="5"]
+size = Vector3(0.04, 0.04, 0.2)
+
+[sub_resource type="SphereMesh" id="6"]
+radius = 0.06
+height = 0.12
+radial_segments = 16
+rings = 8
+
+[sub_resource type="Resource" id="Resource_87asn"]
+script = ExtResource("6_nyol8")
+open_pose = ExtResource("5_qs41c")
+closed_pose = ExtResource("5_qs41c")
+
+[sub_resource type="Resource" id="Resource_7yemt"]
+script = ExtResource("6_nyol8")
+open_pose = ExtResource("8_otwuk")
+closed_pose = ExtResource("8_otwuk")
+
+[sub_resource type="SphereShape3D" id="7"]
+margin = 0.12
+radius = 0.06
+
+[node name="LeverZero" type="Node3D" unique_id=2086985761]
+
+[node name="Frame" type="StaticBody3D" parent="." unique_id=771198862]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Frame" unique_id=1788669264]
+shape = SubResource("1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Frame" unique_id=724980702]
+mesh = SubResource("2")
+
+[node name="LeverOrigin" type="Node3D" parent="." unique_id=2116605608]
+transform = Transform3D(1, -1.06581e-14, 0, 1.06581e-14, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("2_2fa64")
+
+[node name="InteractableLever" type="Node3D" parent="LeverOrigin" unique_id=1269041197]
+script = ExtResource("2")
+default_on_release = true
+
+[node name="HingeBody" type="StaticBody3D" parent="LeverOrigin/InteractableLever" unique_id=2142140340]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+
+[node name="BarCollision" type="CollisionShape3D" parent="LeverOrigin/InteractableLever/HingeBody" unique_id=2133790937]
+shape = SubResource("3")
+
+[node name="HandleCollision" type="CollisionShape3D" parent="LeverOrigin/InteractableLever/HingeBody" unique_id=48303519]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+shape = SubResource("4")
+
+[node name="BarMesh" type="MeshInstance3D" parent="LeverOrigin/InteractableLever/HingeBody" unique_id=1816991351]
+mesh = SubResource("5")
+
+[node name="HandleMesh" type="MeshInstance3D" parent="LeverOrigin/InteractableLever/HingeBody" unique_id=1917546402]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+mesh = SubResource("6")
+
+[node name="GrabPointHandLeft" parent="LeverOrigin/InteractableLever/HingeBody/HandleMesh" unique_id=1556221578 instance=ExtResource("4_lu2nr")]
+transform = Transform3D(-4.37114e-08, 1, -7.53641e-15, -0.707107, -3.09086e-08, -0.707107, -0.707107, -3.09086e-08, 0.707107, 0.05, 0.0759278, -0.0419973)
+hand_pose = SubResource("Resource_87asn")
+
+[node name="GrabPointHandRight" parent="LeverOrigin/InteractableLever/HingeBody/HandleMesh" unique_id=2026555814 instance=ExtResource("7_xbqs6")]
+transform = Transform3D(-4.37114e-08, -1, -1.02355e-14, 0.642788, -2.80971e-08, -0.766044, 0.766044, -3.34849e-08, 0.642788, -0.05, 0.0759278, -0.0419973)
+hand_pose = SubResource("Resource_7yemt")
+
+[node name="HandleOrigin" type="Node3D" parent="LeverOrigin/InteractableLever" unique_id=1012395785]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2)
+
+[node name="InteractableHandle" type="RigidBody3D" parent="LeverOrigin/InteractableLever/HandleOrigin" unique_id=717849026]
+collision_layer = 262144
+collision_mask = 0
+freeze = true
+script = ExtResource("4")
+picked_up_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LeverOrigin/InteractableLever/HandleOrigin/InteractableHandle" unique_id=1444794828]
+shape = SubResource("7")
+
+[node name="GrabPointRedirectLeft" parent="LeverOrigin/InteractableLever/HandleOrigin/InteractableHandle" unique_id=1976298503 node_paths=PackedStringArray("target") instance=ExtResource("10_23ntw")]
+target = NodePath("../../../HingeBody/HandleMesh/GrabPointHandLeft")
+
+[node name="GrabPointRedirectRight" parent="LeverOrigin/InteractableLever/HandleOrigin/InteractableHandle" unique_id=1179055806 node_paths=PackedStringArray("target") instance=ExtResource("10_23ntw")]
+target = NodePath("../../../HingeBody/HandleMesh/GrabPointHandRight")

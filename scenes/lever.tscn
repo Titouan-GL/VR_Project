@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://btdauhn1fjck6"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_4kwec"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_b2psx"]
+radius = 0.05
+
+[sub_resource type="SphereMesh" id="SphereMesh_b2psx"]
+radius = 0.05
+height = 0.1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_b2psx"]
+top_radius = 0.02
+bottom_radius = 0.02
+height = 0.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_b2psx"]
+size = Vector3(0.1, 0.02, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b2psx"]
+size = Vector3(0.1, 0.02, 0.1)
+
+[node name="Lever" type="Node3D" unique_id=383993160]
+
+[node name="PickableObject" parent="." unique_id=2016422706 instance=ExtResource("1_4kwec")]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="PickableObject" unique_id=1671612184]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22886115, 0)
+shape = SubResource("SphereShape3D_b2psx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PickableObject/CollisionShape3D2" unique_id=622280765]
+mesh = SubResource("SphereMesh_b2psx")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="PickableObject/CollisionShape3D2" unique_id=643363852]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.124160916, 0)
+mesh = SubResource("CylinderMesh_b2psx")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=690570033]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1421016652]
+mesh = SubResource("BoxMesh_b2psx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1255211452]
+shape = SubResource("BoxShape3D_b2psx")
+
+[node name="HingeJoint3D" type="HingeJoint3D" parent="." unique_id=973737472]
+node_a = NodePath("../PickableObject")
+node_b = NodePath("../StaticBody3D")
+angular_limit/enable = true
+angular_limit/upper = 0.7853982
+angular_limit/lower = -0.7853982

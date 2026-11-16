@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://dfdyri8s0jnu3"]
+
+[ext_resource type="Script" uid="uid://cuu3fgtfbx6uc" path="res://bullet.gd" id="1_v7oki"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_b2psx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t4vbm"]
+emission_enabled = true
+emission = Color(1, 1, 0, 1)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="Curve" id="Curve_rtl8c"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_64hbv"]
+curve = SubResource("Curve_rtl8c")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b2psx"]
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_64hbv")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v8qja"]
+emission_enabled = true
+emission = Color(1, 1, 0, 1)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_v7oki"]
+material = SubResource("StandardMaterial3D_v8qja")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b2psx"]
+
+[node name="RigidBody3D" type="RigidBody3D" unique_id=2138676233]
+collision_layer = 0
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_v7oki")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1632909808]
+transform = Transform3D(7.8388357e-16, 1.7933166e-08, -0.410263, 0.410263, -1.7933166e-08, 0, -1.7933166e-08, -0.410263, -1.7933166e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_b2psx")
+surface_material_override/0 = SubResource("StandardMaterial3D_t4vbm")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1864678129]
+amount = 60
+lifetime = 0.2
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_b2psx")
+draw_pass_1 = SubResource("SphereMesh_v7oki")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=420660679]
+transform = Transform3D(7.8388357e-16, 1.7933166e-08, -0.410263, 0.410263, -1.7933166e-08, 0, -1.7933166e-08, -0.410263, -1.7933166e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_b2psx")

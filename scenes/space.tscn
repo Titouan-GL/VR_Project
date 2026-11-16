@@ -1,0 +1,379 @@
+[gd_scene format=3 uid="uid://dnwf1hmpk15i7"]
+
+[ext_resource type="Script" uid="uid://yxas1sb8qfx0" path="res://scripts/main.gd" id="1_c6rj5"]
+[ext_resource type="PackedScene" uid="uid://2yw2o56hnn4o" path="res://main_spaceship.tscn" id="2_7a7lp"]
+[ext_resource type="Script" uid="uid://bgdfgfvvy5ckd" path="res://addons/godot-xr-tools/interactables/interactable_joystick_origin.gd" id="6_7wx0h"]
+[ext_resource type="PackedScene" uid="uid://chf08kdfyoa4n" path="res://MainSpaceship.glb" id="6_n0118"]
+[ext_resource type="Script" uid="uid://c0j857ar3agno" path="res://addons/godot-xr-tools/interactables/interactable_joystick.gd" id="7_skhc4"]
+[ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="8_tc3qt"]
+[ext_resource type="Animation" uid="uid://db62hs5s4n2b3" path="res://addons/godot-xr-tools/hands/animations/left/Grip 4.res" id="9_lc4uf"]
+[ext_resource type="Script" uid="uid://dvobm6vcfnqe8" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="10_cu7je"]
+[ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="11_ygrl5"]
+[ext_resource type="Animation" uid="uid://d1xnpyc08njjx" path="res://addons/godot-xr-tools/hands/animations/right/Grip 4.res" id="12_sixpt"]
+[ext_resource type="Script" uid="uid://dlojnwxo25bky" path="res://addons/godot-xr-tools/interactables/interactable_handle.gd" id="13_ry3xx"]
+[ext_resource type="Script" uid="uid://22udbqy33qr6" path="res://scenes/hostile.gd" id="14_7wx0h"]
+[ext_resource type="PackedScene" uid="uid://ca3daqmpo0tua" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.tscn" id="14_bj8pf"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c6rj5"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_dtwn4"]
+sky_material = SubResource("ProceduralSkyMaterial_c6rj5")
+
+[sub_resource type="Environment" id="Environment_x2olr"]
+background_mode = 2
+sky = SubResource("Sky_dtwn4")
+
+[sub_resource type="SphereMesh" id="SphereMesh_b2psx"]
+radius = 500.0
+height = 1000.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_64hbv"]
+radius = 4.3
+height = 10.82
+
+[sub_resource type="BoxShape3D" id="1"]
+size = Vector3(0.2, 0.2, 0.1)
+
+[sub_resource type="BoxMesh" id="2"]
+size = Vector3(0.2, 0.2, 0.1)
+
+[sub_resource type="BoxShape3D" id="3"]
+size = Vector3(0.04, 0.04, 0.2)
+
+[sub_resource type="SphereShape3D" id="4"]
+radius = 0.06
+
+[sub_resource type="BoxMesh" id="5"]
+size = Vector3(0.04, 0.04, 0.2)
+
+[sub_resource type="SphereMesh" id="6"]
+radius = 0.06
+height = 0.12
+radial_segments = 16
+rings = 8
+
+[sub_resource type="Resource" id="Resource_ouraf"]
+script = ExtResource("10_cu7je")
+open_pose = ExtResource("9_lc4uf")
+closed_pose = ExtResource("9_lc4uf")
+
+[sub_resource type="Resource" id="Resource_upq8k"]
+script = ExtResource("10_cu7je")
+open_pose = ExtResource("12_sixpt")
+closed_pose = ExtResource("12_sixpt")
+
+[sub_resource type="SphereShape3D" id="7"]
+margin = 0.12
+radius = 0.06
+
+[node name="Space" type="Node3D" unique_id=1885814155 node_paths=PackedStringArray("enemies")]
+script = ExtResource("1_c6rj5")
+enemies = [NodePath("RigidBody3D2"), NodePath("RigidBody3D3")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1470800755]
+environment = SubResource("Environment_x2olr")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1790372096]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="RigidBody3D" parent="." unique_id=764400819 node_paths=PackedStringArray("world") instance=ExtResource("2_7a7lp")]
+world = NodePath("..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1234984027]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2441.6074, -3.0517578e-05, -2618.2273)
+mesh = SubResource("SphereMesh_b2psx")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=182293888]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2546.5938, 1118.7003, -2627.4326)
+mesh = SubResource("SphereMesh_b2psx")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1500084136]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1960.8735, -1172.6436, 3174.7285)
+mesh = SubResource("SphereMesh_b2psx")
+
+[node name="RigidBody3D2" type="RigidBody3D" parent="." unique_id=634181641]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, -378.84338)
+collision_layer = 0
+collision_mask = 0
+mass = 10000.0
+gravity_scale = 0.0
+center_of_mass_mode = 1
+script = ExtResource("14_7wx0h")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2" unique_id=1244227532]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -1.1821707, 2.0247543)
+shape = SubResource("CapsuleShape3D_64hbv")
+
+[node name="MainSpaceship" parent="RigidBody3D2" unique_id=1270738134 instance=ExtResource("6_n0118")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 5.9604645e-08, -3.007347, 2.881538)
+
+[node name="JoystickMovement" type="Node3D" parent="RigidBody3D2/MainSpaceship" unique_id=178279516]
+transform = Transform3D(-0.7, 6.119594e-08, 2.6749595e-15, 0, -3.059797e-08, 0.7, 6.119594e-08, 0.7, 3.059797e-08, 0.34824976, 2.7656171, 3.2411132)
+
+[node name="Frame" type="StaticBody3D" parent="RigidBody3D2/MainSpaceship/JoystickMovement" unique_id=1657898471]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2/MainSpaceship/JoystickMovement/Frame" unique_id=872115851]
+shape = SubResource("1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D2/MainSpaceship/JoystickMovement/Frame" unique_id=876689691]
+mesh = SubResource("2")
+
+[node name="JoystickOrigin" type="Node3D" parent="RigidBody3D2/MainSpaceship/JoystickMovement" unique_id=746868355]
+transform = Transform3D(1, -1.06581e-14, 0, 1.06581e-14, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("6_7wx0h")
+
+[node name="InteractableJoystick" type="Node3D" parent="RigidBody3D2/MainSpaceship/JoystickMovement/JoystickOrigin" unique_id=654638687]
+script = ExtResource("7_skhc4")
+default_on_release = true
+
+[node name="JoystickBody" type="StaticBody3D" parent="RigidBody3D2/MainSpaceship/JoystickMovement/JoystickOrigin/InteractableJoystick" unique_id=722976788]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+
+[node name="BarCollision" type="CollisionShape3D" parent="RigidBody3D2/MainSpaceship/JoystickMovement/JoystickOrigin/InteractableJoystick/JoystickBody" unique_id=579644323]
+shape = SubResource("3")
+
+[node name="HandleCollision" type="CollisionShape3D" parent="RigidBody3D2/MainSpaceship/JoystickMovement/JoystickOrigin/InteractableJoystick/JoystickBody" unique_id=474202545]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+shape = SubResource("4")
+
+[node name="BarMesh" type="MeshInstance3D" parent="RigidBody3D2/MainSpaceship/JoystickMovement/JoystickOrigin/InteractableJoystick/JoystickBody" unique_id=1177339757]
+mesh = SubResource("5")
+
+[node name="HandleMesh" type="MeshInstance3D" parent="RigidBody3D2/MainSpaceship/JoystickMovement/JoystickOrigin/InteractableJoystick/JoystickBody" unique_id=1868570076]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+mesh = SubResource("6")
+
+[node name="GrabPointHandLeft" parent="RigidBody3D2/MainSpaceship/JoystickMovement/JoystickOrigin/InteractableJoystick/JoystickBody/HandleMesh" unique_id=395582314 instance=ExtResource("8_tc3qt")]
+transform = Transform3D(0.96115583, 0.26471508, 0.07814411, 0.08103489, -7.192155e-08, -0.9967116, -0.2638446, 0.9643268, -0.021451231, -0.00472036, 0.07364482, 0.06434201)
+hand_pose = SubResource("Resource_ouraf")
+
+[node name="GrabPointHandRight" parent="RigidBody3D2/MainSpaceship/JoystickMovement/JoystickOrigin/InteractableJoystick/JoystickBody/HandleMesh" unique_id=11171948 instance=ExtResource("11_ygrl5")]
+transform = Transform3D(-4.37114e-08, -1, -1.02355e-14, 0.642788, -2.80971e-08, -0.766044, 0.766044, -3.34849e-08, 0.642788, -0.05, 0.0759278, -0.0419973)
+hand_pose = SubResource("Resource_upq8k")
+
+[node name="HandleOrigin" type="Node3D" parent="RigidBody3D2/MainSpaceship/JoystickMovement/JoystickOrigin/InteractableJoystick" unique_id=1789490502]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2)
+
+[node name="InteractableHandle" type="RigidBody3D" parent="RigidBody3D2/MainSpaceship/JoystickMovement/JoystickOrigin/InteractableJoystick/HandleOrigin" unique_id=472984075]
+collision_layer = 262144
+collision_mask = 0
+freeze = true
+script = ExtResource("13_ry3xx")
+picked_up_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2/MainSpaceship/JoystickMovement/JoystickOrigin/InteractableJoystick/HandleOrigin/InteractableHandle" unique_id=254763722]
+shape = SubResource("7")
+
+[node name="GrabPointRedirectLeft" parent="RigidBody3D2/MainSpaceship/JoystickMovement/JoystickOrigin/InteractableJoystick/HandleOrigin/InteractableHandle" unique_id=519778676 node_paths=PackedStringArray("target") instance=ExtResource("14_bj8pf")]
+target = NodePath("../../../JoystickBody/HandleMesh/GrabPointHandLeft")
+
+[node name="GrabPointRedirectRight" parent="RigidBody3D2/MainSpaceship/JoystickMovement/JoystickOrigin/InteractableJoystick/HandleOrigin/InteractableHandle" unique_id=1279440691 node_paths=PackedStringArray("target") instance=ExtResource("14_bj8pf")]
+target = NodePath("../../../JoystickBody/HandleMesh/GrabPointHandRight")
+
+[node name="JoystickRotation" type="Node3D" parent="RigidBody3D2/MainSpaceship" unique_id=1402950134]
+transform = Transform3D(-0.7, 6.119594e-08, 2.6749595e-15, 0, -3.059797e-08, 0.7, 6.119594e-08, 0.7, 3.059797e-08, -0.35571188, 2.7656171, 3.2411132)
+
+[node name="Frame" type="StaticBody3D" parent="RigidBody3D2/MainSpaceship/JoystickRotation" unique_id=326294521]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2/MainSpaceship/JoystickRotation/Frame" unique_id=1529814209]
+shape = SubResource("1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D2/MainSpaceship/JoystickRotation/Frame" unique_id=2003277942]
+mesh = SubResource("2")
+
+[node name="JoystickOrigin" type="Node3D" parent="RigidBody3D2/MainSpaceship/JoystickRotation" unique_id=1273987065]
+transform = Transform3D(1, -1.06581e-14, 0, 1.06581e-14, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("6_7wx0h")
+
+[node name="InteractableJoystick" type="Node3D" parent="RigidBody3D2/MainSpaceship/JoystickRotation/JoystickOrigin" unique_id=1537522015]
+script = ExtResource("7_skhc4")
+default_on_release = true
+
+[node name="JoystickBody" type="StaticBody3D" parent="RigidBody3D2/MainSpaceship/JoystickRotation/JoystickOrigin/InteractableJoystick" unique_id=893807696]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+
+[node name="BarCollision" type="CollisionShape3D" parent="RigidBody3D2/MainSpaceship/JoystickRotation/JoystickOrigin/InteractableJoystick/JoystickBody" unique_id=891322185]
+shape = SubResource("3")
+
+[node name="HandleCollision" type="CollisionShape3D" parent="RigidBody3D2/MainSpaceship/JoystickRotation/JoystickOrigin/InteractableJoystick/JoystickBody" unique_id=2116978924]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+shape = SubResource("4")
+
+[node name="BarMesh" type="MeshInstance3D" parent="RigidBody3D2/MainSpaceship/JoystickRotation/JoystickOrigin/InteractableJoystick/JoystickBody" unique_id=539680179]
+mesh = SubResource("5")
+
+[node name="HandleMesh" type="MeshInstance3D" parent="RigidBody3D2/MainSpaceship/JoystickRotation/JoystickOrigin/InteractableJoystick/JoystickBody" unique_id=1310578542]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+mesh = SubResource("6")
+
+[node name="GrabPointHandLeft" parent="RigidBody3D2/MainSpaceship/JoystickRotation/JoystickOrigin/InteractableJoystick/JoystickBody/HandleMesh" unique_id=2107107921 instance=ExtResource("8_tc3qt")]
+transform = Transform3D(0.96115583, 0.26471508, 0.07814411, 0.08103489, -7.192155e-08, -0.9967116, -0.2638446, 0.9643268, -0.021451231, -0.00472036, 0.07364482, 0.06434201)
+hand_pose = SubResource("Resource_ouraf")
+
+[node name="GrabPointHandRight" parent="RigidBody3D2/MainSpaceship/JoystickRotation/JoystickOrigin/InteractableJoystick/JoystickBody/HandleMesh" unique_id=585452852 instance=ExtResource("11_ygrl5")]
+transform = Transform3D(0.9866442, -0.06320681, 0.15012577, 0.15271945, 0.038397983, -0.9875235, 0.056653686, 0.9972615, 0.047538035, 0.020555556, 0.08180255, 0.044675052)
+hand_pose = SubResource("Resource_upq8k")
+
+[node name="HandleOrigin" type="Node3D" parent="RigidBody3D2/MainSpaceship/JoystickRotation/JoystickOrigin/InteractableJoystick" unique_id=1290257302]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2)
+
+[node name="InteractableHandle" type="RigidBody3D" parent="RigidBody3D2/MainSpaceship/JoystickRotation/JoystickOrigin/InteractableJoystick/HandleOrigin" unique_id=742780102]
+collision_layer = 262144
+collision_mask = 0
+freeze = true
+script = ExtResource("13_ry3xx")
+picked_up_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2/MainSpaceship/JoystickRotation/JoystickOrigin/InteractableJoystick/HandleOrigin/InteractableHandle" unique_id=2100177865]
+shape = SubResource("7")
+
+[node name="GrabPointRedirectLeft" parent="RigidBody3D2/MainSpaceship/JoystickRotation/JoystickOrigin/InteractableJoystick/HandleOrigin/InteractableHandle" unique_id=1773498990 node_paths=PackedStringArray("target") instance=ExtResource("14_bj8pf")]
+target = NodePath("../../../JoystickBody/HandleMesh/GrabPointHandLeft")
+
+[node name="GrabPointRedirectRight" parent="RigidBody3D2/MainSpaceship/JoystickRotation/JoystickOrigin/InteractableJoystick/HandleOrigin/InteractableHandle" unique_id=1138329259 node_paths=PackedStringArray("target") instance=ExtResource("14_bj8pf")]
+target = NodePath("../../../JoystickBody/HandleMesh/GrabPointHandRight")
+
+[node name="RigidBody3D3" type="RigidBody3D" parent="." unique_id=1718116356]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 404.06543, 0, 11.038422)
+collision_layer = 0
+collision_mask = 0
+mass = 10000.0
+gravity_scale = 0.0
+center_of_mass_mode = 1
+script = ExtResource("14_7wx0h")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D3" unique_id=454990038]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -1.1821707, 2.0247543)
+shape = SubResource("CapsuleShape3D_64hbv")
+
+[node name="MainSpaceship" parent="RigidBody3D3" unique_id=1734608920 instance=ExtResource("6_n0118")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 5.9604645e-08, -3.007347, 2.881538)
+
+[node name="JoystickMovement" type="Node3D" parent="RigidBody3D3/MainSpaceship" unique_id=1162816325]
+transform = Transform3D(-0.7, 6.119594e-08, 2.6749595e-15, 0, -3.059797e-08, 0.7, 6.119594e-08, 0.7, 3.059797e-08, 0.34824976, 2.7656171, 3.2411132)
+
+[node name="Frame" type="StaticBody3D" parent="RigidBody3D3/MainSpaceship/JoystickMovement" unique_id=1698674466]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D3/MainSpaceship/JoystickMovement/Frame" unique_id=1613287203]
+shape = SubResource("1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D3/MainSpaceship/JoystickMovement/Frame" unique_id=1141059566]
+mesh = SubResource("2")
+
+[node name="JoystickOrigin" type="Node3D" parent="RigidBody3D3/MainSpaceship/JoystickMovement" unique_id=171305630]
+transform = Transform3D(1, -1.06581e-14, 0, 1.06581e-14, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("6_7wx0h")
+
+[node name="InteractableJoystick" type="Node3D" parent="RigidBody3D3/MainSpaceship/JoystickMovement/JoystickOrigin" unique_id=1153071615]
+script = ExtResource("7_skhc4")
+default_on_release = true
+
+[node name="JoystickBody" type="StaticBody3D" parent="RigidBody3D3/MainSpaceship/JoystickMovement/JoystickOrigin/InteractableJoystick" unique_id=1976939980]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+
+[node name="BarCollision" type="CollisionShape3D" parent="RigidBody3D3/MainSpaceship/JoystickMovement/JoystickOrigin/InteractableJoystick/JoystickBody" unique_id=1186819730]
+shape = SubResource("3")
+
+[node name="HandleCollision" type="CollisionShape3D" parent="RigidBody3D3/MainSpaceship/JoystickMovement/JoystickOrigin/InteractableJoystick/JoystickBody" unique_id=908606442]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+shape = SubResource("4")
+
+[node name="BarMesh" type="MeshInstance3D" parent="RigidBody3D3/MainSpaceship/JoystickMovement/JoystickOrigin/InteractableJoystick/JoystickBody" unique_id=1110548296]
+mesh = SubResource("5")
+
+[node name="HandleMesh" type="MeshInstance3D" parent="RigidBody3D3/MainSpaceship/JoystickMovement/JoystickOrigin/InteractableJoystick/JoystickBody" unique_id=1080924481]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+mesh = SubResource("6")
+
+[node name="GrabPointHandLeft" parent="RigidBody3D3/MainSpaceship/JoystickMovement/JoystickOrigin/InteractableJoystick/JoystickBody/HandleMesh" unique_id=1886543583 instance=ExtResource("8_tc3qt")]
+transform = Transform3D(0.96115583, 0.26471508, 0.07814411, 0.08103489, -7.192155e-08, -0.9967116, -0.2638446, 0.9643268, -0.021451231, -0.00472036, 0.07364482, 0.06434201)
+hand_pose = SubResource("Resource_ouraf")
+
+[node name="GrabPointHandRight" parent="RigidBody3D3/MainSpaceship/JoystickMovement/JoystickOrigin/InteractableJoystick/JoystickBody/HandleMesh" unique_id=774812443 instance=ExtResource("11_ygrl5")]
+transform = Transform3D(-4.37114e-08, -1, -1.02355e-14, 0.642788, -2.80971e-08, -0.766044, 0.766044, -3.34849e-08, 0.642788, -0.05, 0.0759278, -0.0419973)
+hand_pose = SubResource("Resource_upq8k")
+
+[node name="HandleOrigin" type="Node3D" parent="RigidBody3D3/MainSpaceship/JoystickMovement/JoystickOrigin/InteractableJoystick" unique_id=1990135172]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2)
+
+[node name="InteractableHandle" type="RigidBody3D" parent="RigidBody3D3/MainSpaceship/JoystickMovement/JoystickOrigin/InteractableJoystick/HandleOrigin" unique_id=2026731333]
+collision_layer = 262144
+collision_mask = 0
+freeze = true
+script = ExtResource("13_ry3xx")
+picked_up_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D3/MainSpaceship/JoystickMovement/JoystickOrigin/InteractableJoystick/HandleOrigin/InteractableHandle" unique_id=1507816189]
+shape = SubResource("7")
+
+[node name="GrabPointRedirectLeft" parent="RigidBody3D3/MainSpaceship/JoystickMovement/JoystickOrigin/InteractableJoystick/HandleOrigin/InteractableHandle" unique_id=37240372 node_paths=PackedStringArray("target") instance=ExtResource("14_bj8pf")]
+target = NodePath("../../../JoystickBody/HandleMesh/GrabPointHandLeft")
+
+[node name="GrabPointRedirectRight" parent="RigidBody3D3/MainSpaceship/JoystickMovement/JoystickOrigin/InteractableJoystick/HandleOrigin/InteractableHandle" unique_id=1184812376 node_paths=PackedStringArray("target") instance=ExtResource("14_bj8pf")]
+target = NodePath("../../../JoystickBody/HandleMesh/GrabPointHandRight")
+
+[node name="JoystickRotation" type="Node3D" parent="RigidBody3D3/MainSpaceship" unique_id=947423632]
+transform = Transform3D(-0.7, 6.119594e-08, 2.6749595e-15, 0, -3.059797e-08, 0.7, 6.119594e-08, 0.7, 3.059797e-08, -0.35571188, 2.7656171, 3.2411132)
+
+[node name="Frame" type="StaticBody3D" parent="RigidBody3D3/MainSpaceship/JoystickRotation" unique_id=522714190]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D3/MainSpaceship/JoystickRotation/Frame" unique_id=853054092]
+shape = SubResource("1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D3/MainSpaceship/JoystickRotation/Frame" unique_id=1560963405]
+mesh = SubResource("2")
+
+[node name="JoystickOrigin" type="Node3D" parent="RigidBody3D3/MainSpaceship/JoystickRotation" unique_id=688989597]
+transform = Transform3D(1, -1.06581e-14, 0, 1.06581e-14, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("6_7wx0h")
+
+[node name="InteractableJoystick" type="Node3D" parent="RigidBody3D3/MainSpaceship/JoystickRotation/JoystickOrigin" unique_id=1095602023]
+script = ExtResource("7_skhc4")
+default_on_release = true
+
+[node name="JoystickBody" type="StaticBody3D" parent="RigidBody3D3/MainSpaceship/JoystickRotation/JoystickOrigin/InteractableJoystick" unique_id=1625852870]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+
+[node name="BarCollision" type="CollisionShape3D" parent="RigidBody3D3/MainSpaceship/JoystickRotation/JoystickOrigin/InteractableJoystick/JoystickBody" unique_id=1866288197]
+shape = SubResource("3")
+
+[node name="HandleCollision" type="CollisionShape3D" parent="RigidBody3D3/MainSpaceship/JoystickRotation/JoystickOrigin/InteractableJoystick/JoystickBody" unique_id=721097529]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+shape = SubResource("4")
+
+[node name="BarMesh" type="MeshInstance3D" parent="RigidBody3D3/MainSpaceship/JoystickRotation/JoystickOrigin/InteractableJoystick/JoystickBody" unique_id=57661350]
+mesh = SubResource("5")
+
+[node name="HandleMesh" type="MeshInstance3D" parent="RigidBody3D3/MainSpaceship/JoystickRotation/JoystickOrigin/InteractableJoystick/JoystickBody" unique_id=192995425]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+mesh = SubResource("6")
+
+[node name="GrabPointHandLeft" parent="RigidBody3D3/MainSpaceship/JoystickRotation/JoystickOrigin/InteractableJoystick/JoystickBody/HandleMesh" unique_id=648478975 instance=ExtResource("8_tc3qt")]
+transform = Transform3D(0.96115583, 0.26471508, 0.07814411, 0.08103489, -7.192155e-08, -0.9967116, -0.2638446, 0.9643268, -0.021451231, -0.00472036, 0.07364482, 0.06434201)
+hand_pose = SubResource("Resource_ouraf")
+
+[node name="GrabPointHandRight" parent="RigidBody3D3/MainSpaceship/JoystickRotation/JoystickOrigin/InteractableJoystick/JoystickBody/HandleMesh" unique_id=1964488658 instance=ExtResource("11_ygrl5")]
+transform = Transform3D(0.9866442, -0.06320681, 0.15012577, 0.15271945, 0.038397983, -0.9875235, 0.056653686, 0.9972615, 0.047538035, 0.020555556, 0.08180255, 0.044675052)
+hand_pose = SubResource("Resource_upq8k")
+
+[node name="HandleOrigin" type="Node3D" parent="RigidBody3D3/MainSpaceship/JoystickRotation/JoystickOrigin/InteractableJoystick" unique_id=1291854445]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2)
+
+[node name="InteractableHandle" type="RigidBody3D" parent="RigidBody3D3/MainSpaceship/JoystickRotation/JoystickOrigin/InteractableJoystick/HandleOrigin" unique_id=1656521804]
+collision_layer = 262144
+collision_mask = 0
+freeze = true
+script = ExtResource("13_ry3xx")
+picked_up_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D3/MainSpaceship/JoystickRotation/JoystickOrigin/InteractableJoystick/HandleOrigin/InteractableHandle" unique_id=962633467]
+shape = SubResource("7")
+
+[node name="GrabPointRedirectLeft" parent="RigidBody3D3/MainSpaceship/JoystickRotation/JoystickOrigin/InteractableJoystick/HandleOrigin/InteractableHandle" unique_id=1433918486 node_paths=PackedStringArray("target") instance=ExtResource("14_bj8pf")]
+target = NodePath("../../../JoystickBody/HandleMesh/GrabPointHandLeft")
+
+[node name="GrabPointRedirectRight" parent="RigidBody3D3/MainSpaceship/JoystickRotation/JoystickOrigin/InteractableJoystick/HandleOrigin/InteractableHandle" unique_id=1057751457 node_paths=PackedStringArray("target") instance=ExtResource("14_bj8pf")]
+target = NodePath("../../../JoystickBody/HandleMesh/GrabPointHandRight")

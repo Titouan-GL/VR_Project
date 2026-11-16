@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bkg3gf6djrr4n"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_thpd4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fywqy"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_b2psx"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="PickableObject" unique_id=1606473977 instance=ExtResource("1_thpd4")]
+
+[node name="CollisionShape3D" parent="." index="0"]
+shape = SubResource("BoxShape3D_fywqy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1" unique_id=666039594]
+mesh = SubResource("BoxMesh_b2psx")
