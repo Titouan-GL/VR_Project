@@ -236,6 +236,7 @@ mass = 10000.0
 gravity_scale = 0.0
 center_of_mass_mode = 1
 script = ExtResource("1_eps4d")
+VR_enabled = true
 vr_controller = NodePath("PlayerPosition/VRController")
 non_vr_camera = NodePath("Camera3D")
 movement_joystick = NodePath("MainSpaceship/JoystickMovement/JoystickOrigin/InteractableJoystick")
@@ -458,7 +459,7 @@ skin = SubResource("Skin_5i2jj")
 skeleton = NodePath("..")
 
 [node name="CCDIK3D" type="CCDIK3D" parent="MainSpaceship/Armature/Skeleton3D" unique_id=700350518]
-angular_delta_limit = 3.141592653589793
+angular_delta_limit = 0.17453292519943295
 deterministic = true
 setting_count = 2
 settings/0/target_node = NodePath("../../../../Guns_Target")
@@ -489,13 +490,13 @@ settings/1/joints/2/rotation_axis = 3
 settings/1/joints/2/limitation = null
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="MainSpaceship/Armature/Skeleton3D" unique_id=1295036482]
-transform = Transform3D(-0.7911594, -0.033051383, -0.6107165, -0.6115245, 0.02603501, 0.7907969, -0.010236908, 0.9991146, -0.04080981, 3.1670918, 0.5125842, 7.142639)
+transform = Transform3D(-0.78886884, -0.040641155, -0.6132166, -0.6144871, 0.03661352, 0.7880768, -0.009576266, 0.99850273, -0.05385697, 3.7363248, -0.26670378, 6.504631)
 bone_name = "Gun_Tip.L"
 bone_idx = 7
 script = ExtResource("4_7ibi4")
 
 [node name="BoneAttachment3D2" type="BoneAttachment3D" parent="MainSpaceship/Armature/Skeleton3D" unique_id=1348109899]
-transform = Transform3D(-0.82834154, 0.01740631, 0.5599531, 0.56018764, 0.037048962, 0.8275369, -0.006341324, 0.99916184, -0.04043997, -3.1712885, 0.5136295, 7.1401415)
+transform = Transform3D(-0.805246, 0.016580103, 0.59270954, 0.59265083, 0.053792294, 0.8036617, -0.018558446, 0.9984146, -0.05314235, -3.818431, -0.20838238, 6.503336)
 bone_name = "Gun_Tip.R"
 bone_idx = 2
 script = ExtResource("4_7ibi4")

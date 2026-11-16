@@ -39,13 +39,14 @@ func shoot():
 func find_target_enemy() -> Hostile:
 	if target_enemy == null:
 		for e in world.enemies:
-			if transform.basis.z.dot(e.global_position) < 0.1:
+			var to_target_e = (e.global_position - global_position).normalized()
+			if -transform.basis.z.dot(to_target_e) > cos(deg_to_rad(30)):
 				return e
 	return null
 
 
 func update_target_enemy():
-	if target_enemy == null or transform.basis.z.dot(target_enemy.global_position) > 0:
+	if target_enemy == null or -global_transform.basis.z.dot((target_enemy.global_position - global_position).normalized()) <= cos(deg_to_rad(30)):
 		target_enemy = find_target_enemy()
 		crosshair.visible = target_enemy != null
 		ik.active = false
@@ -61,7 +62,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		mouse_input += event.xformed_by(viewport_transform).relative
 
 func _process(delta: float) -> void:
-	shoot()
+	#shoot()
 	var movementVector: Vector3
 	var rotationVector: Vector3
 	if VR_enabled:
