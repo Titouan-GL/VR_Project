@@ -80,6 +80,7 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="RigidBody3D" parent="." unique_id=764400819 node_paths=PackedStringArray("world") instance=ExtResource("2_7a7lp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.063841105, 3.4332275e-05, 0.045467198)
 world = NodePath("..")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1234984027]

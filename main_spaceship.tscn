@@ -229,13 +229,15 @@ closed_pose = ExtResource("10_r1c4y")
 margin = 0.12
 radius = 0.06
 
-[node name="RigidBody3D" type="RigidBody3D" unique_id=764400819 node_paths=PackedStringArray("movement_joystick", "rotation_joystick", "crosshair", "target", "ik", "gunL", "gunR")]
+[node name="RigidBody3D" type="RigidBody3D" unique_id=764400819 node_paths=PackedStringArray("vr_controller", "non_vr_camera", "movement_joystick", "rotation_joystick", "crosshair", "target", "ik", "gunL", "gunR")]
 collision_layer = 0
 collision_mask = 0
 mass = 10000.0
 gravity_scale = 0.0
 center_of_mass_mode = 1
 script = ExtResource("1_eps4d")
+vr_controller = NodePath("PlayerPosition/VRController")
+non_vr_camera = NodePath("Camera3D")
 movement_joystick = NodePath("MainSpaceship/JoystickMovement/JoystickOrigin/InteractableJoystick")
 rotation_joystick = NodePath("MainSpaceship/JoystickRotation/JoystickOrigin/InteractableJoystick")
 crosshair = NodePath("Crosshair")
@@ -249,6 +251,9 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0
 
 [node name="VRController" parent="PlayerPosition" unique_id=449353956 instance=ExtResource("2_7ibi4")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.2835303, 0)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1781920453]
+transform = Transform3D(1, 0, 0, 0, 0.9817623, 0.1901127, 0, -0.1901127, 0.9817623, 0, 5.6449494, 14.479685)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1830008578]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -1.1821707, 2.0247543)
