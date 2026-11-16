@@ -14,13 +14,14 @@ class_name SpaceShip
 @export var gunL: Gun
 @export var gunR: Gun
 
-var thruster_strength: float = 1000000
-var rotation_speed: float = 1000
 var camera: Camera3D = null
 var target_enemy: Hostile = null
 var mouse_input: Vector2
+var engine: Spaceship_Engine = null
 
 func _ready():
+	engine = Spaceship_Engine.new()
+	engine.create(self)
 	crosshair.visible = false
 	if VR_enabled:
 		non_vr_camera.current = false
@@ -71,10 +72,8 @@ func _process(delta: float) -> void:
 	else:
 		movementVector = Vector3(int(Input.is_action_pressed("move_right"))-int(Input.is_action_pressed("move_left")), 0, int(Input.is_action_pressed("move_backward"))-int(Input.is_action_pressed("move_forward")))*45
 		rotationVector = Vector3(-mouse_input.y, -mouse_input.x, 0)*10
-	if(movementVector.length() > 0.1):
-		apply_force(global_transform.basis*movementVector*thruster_strength*delta)
-	if(rotationVector.length() > 0.1):
-		apply_torque(global_transform.basis*rotationVector*rotation_speed)
+	engine.process(movementVector, rotationVector, delta)
+
 	
 	mouse_input = Vector2.ZERO
 	update_target_enemy()

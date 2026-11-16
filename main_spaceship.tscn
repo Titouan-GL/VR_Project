@@ -628,4 +628,3 @@ target = NodePath("../../../JoystickBody/HandleMesh/GrabPointHandLeft")
 target = NodePath("../../../JoystickBody/HandleMesh/GrabPointHandRight")
 
 [node name="Crosshair" parent="." unique_id=1783311936 instance=ExtResource("13_udvu8")]
-visible = false

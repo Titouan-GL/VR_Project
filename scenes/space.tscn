@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://yxas1sb8qfx0" path="res://scripts/main.gd" id="1_c6rj5"]
 [ext_resource type="PackedScene" uid="uid://2yw2o56hnn4o" path="res://main_spaceship.tscn" id="2_7a7lp"]
+[ext_resource type="Texture2D" uid="uid://ds1jvrblg46go" path="res://assets/textures/skybox/panorama_image.png" id="2_7wx0h"]
 [ext_resource type="Script" uid="uid://bgdfgfvvy5ckd" path="res://addons/godot-xr-tools/interactables/interactable_joystick_origin.gd" id="6_7wx0h"]
 [ext_resource type="PackedScene" uid="uid://chf08kdfyoa4n" path="res://MainSpaceship.glb" id="6_n0118"]
 [ext_resource type="Script" uid="uid://c0j857ar3agno" path="res://addons/godot-xr-tools/interactables/interactable_joystick.gd" id="7_skhc4"]
@@ -14,16 +15,15 @@
 [ext_resource type="Script" uid="uid://22udbqy33qr6" path="res://scenes/hostile.gd" id="14_7wx0h"]
 [ext_resource type="PackedScene" uid="uid://ca3daqmpo0tua" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.tscn" id="14_bj8pf"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c6rj5"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_s0xhm"]
+panorama = ExtResource("2_7wx0h")
 
-[sub_resource type="Sky" id="Sky_dtwn4"]
-sky_material = SubResource("ProceduralSkyMaterial_c6rj5")
+[sub_resource type="Sky" id="Sky_44q76"]
+sky_material = SubResource("PanoramaSkyMaterial_s0xhm")
 
 [sub_resource type="Environment" id="Environment_x2olr"]
 background_mode = 2
-sky = SubResource("Sky_dtwn4")
+sky = SubResource("Sky_44q76")
 
 [sub_resource type="SphereMesh" id="SphereMesh_b2psx"]
 radius = 500.0
