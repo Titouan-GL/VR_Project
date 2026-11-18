@@ -236,7 +236,6 @@ mass = 10000.0
 gravity_scale = 0.0
 center_of_mass_mode = 1
 script = ExtResource("1_eps4d")
-VR_enabled = true
 vr_controller = NodePath("PlayerPosition/VRController")
 non_vr_camera = NodePath("Camera3D")
 movement_joystick = NodePath("MainSpaceship/JoystickMovement/JoystickOrigin/InteractableJoystick")
@@ -255,6 +254,7 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1781920453]
 transform = Transform3D(1, 0, 0, 0, 0.9817623, 0.1901127, 0, -0.1901127, 0.9817623, 0, 5.6449494, 14.479685)
+far = 10000.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1830008578]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -1.1821707, 2.0247543)
