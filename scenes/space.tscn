@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://2yw2o56hnn4o" path="res://main_spaceship.tscn" id="2_7a7lp"]
 [ext_resource type="Texture2D" uid="uid://ds1jvrblg46go" path="res://assets/textures/skybox/panorama_image.png" id="2_7wx0h"]
 [ext_resource type="Script" uid="uid://bgdfgfvvy5ckd" path="res://addons/godot-xr-tools/interactables/interactable_joystick_origin.gd" id="6_7wx0h"]
-[ext_resource type="PackedScene" uid="uid://chf08kdfyoa4n" path="res://MainSpaceship.glb" id="6_n0118"]
+[ext_resource type="PackedScene" uid="uid://chf08kdfyoa4n" path="res://assets/meshes/MainSpaceship.glb" id="6_n0118"]
 [ext_resource type="Script" uid="uid://c0j857ar3agno" path="res://addons/godot-xr-tools/interactables/interactable_joystick.gd" id="7_skhc4"]
 [ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="8_tc3qt"]
 [ext_resource type="Animation" uid="uid://db62hs5s4n2b3" path="res://addons/godot-xr-tools/hands/animations/left/Grip 4.res" id="9_lc4uf"]

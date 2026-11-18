@@ -10,7 +10,6 @@ class_name SpaceShip
 @export var world: World
 @export var crosshair: Node3D
 @export var target: Node3D
-@export var ik: IKModifier3D
 @export var gunL: Gun
 @export var gunR: Gun
 #engine
@@ -52,12 +51,10 @@ func update_target_enemy():
 	if target_enemy == null or -global_transform.basis.z.dot((target_enemy.global_position - global_position).normalized()) <= cos(deg_to_rad(30)):
 		target_enemy = find_target_enemy()
 		crosshair.visible = target_enemy != null
-		ik.active = false
 	if target_enemy != null:
 		crosshair.global_position = camera.global_position+(target_enemy.global_position - camera.global_position).normalized()*1
 		crosshair.look_at(target_enemy.global_position)
 		target.global_position = target_enemy.global_position
-		ik.active = true
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:

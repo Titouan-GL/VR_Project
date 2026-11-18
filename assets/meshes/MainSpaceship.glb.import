@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://chf08kdfyoa4n"
-path="res://.godot/imported/MainSpaceship.glb-7ecb4650b82afde0fb2b6ef82d1ab345.scn"
+path="res://.godot/imported/MainSpaceship.glb-d3786329023417e0d336c433b1769668.scn"
 
 [deps]
 
-source_file="res://MainSpaceship.glb"
-dest_files=["res://.godot/imported/MainSpaceship.glb-7ecb4650b82afde0fb2b6ef82d1ab345.scn"]
+source_file="res://assets/meshes/MainSpaceship.glb"
+dest_files=["res://.godot/imported/MainSpaceship.glb-d3786329023417e0d336c433b1769668.scn"]
 
 [params]
 
