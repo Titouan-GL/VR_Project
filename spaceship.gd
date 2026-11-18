@@ -13,15 +13,22 @@ class_name SpaceShip
 @export var ik: IKModifier3D
 @export var gunL: Gun
 @export var gunR: Gun
+#engine
+@export var engines: Array[BoneAttachment3D]
+
 
 var camera: Camera3D = null
 var target_enemy: Hostile = null
 var mouse_input: Vector2
 var engine: Spaceship_Engine = null
+var joystick_max_angle: float = 45
+
+var movementVector: Vector3
+var rotationVector: Vector3
 
 func _ready():
 	engine = Spaceship_Engine.new()
-	engine.create(self)
+	engine.create(self, engines)
 	crosshair.visible = false
 	if VR_enabled:
 		non_vr_camera.current = false
@@ -31,11 +38,6 @@ func _ready():
 		vr_controller.visible = false
 	camera = get_viewport().get_camera_3d()
 	
-func shoot():
-	gunL.target = target_enemy
-	gunR.target = target_enemy
-	gunL.shoot()
-	gunR.shoot()
 
 func find_target_enemy() -> Hostile:
 	if target_enemy == null:
@@ -62,18 +64,20 @@ func _unhandled_input(event: InputEvent) -> void:
 		var viewport_transform: Transform2D = get_tree().root.get_final_transform()
 		mouse_input += event.xformed_by(viewport_transform).relative
 
-func _process(delta: float) -> void:
-	#shoot()
-	var movementVector: Vector3
-	var rotationVector: Vector3
+func _physics_process(delta: float) -> void:
+	engine.physics_process(movementVector, rotationVector, delta)
+
+func _process(_delta: float) -> void:
 	if VR_enabled:
-		movementVector = Vector3(movement_joystick.joystick_x_position, 0, movement_joystick.joystick_y_position)
-		rotationVector = Vector3(rotation_joystick.joystick_y_position, -rotation_joystick.joystick_x_position, 0)
+		movementVector = Vector3(movement_joystick.joystick_x_position, 0, movement_joystick.joystick_y_position)/joystick_max_angle
+		rotationVector = Vector3(rotation_joystick.joystick_y_position, -rotation_joystick.joystick_x_position, 0)/joystick_max_angle
 	else:
-		movementVector = Vector3(int(Input.is_action_pressed("move_right"))-int(Input.is_action_pressed("move_left")), 0, int(Input.is_action_pressed("move_backward"))-int(Input.is_action_pressed("move_forward")))*45
-		rotationVector = Vector3(-mouse_input.y, -mouse_input.x, 0)*10
-	engine.process(movementVector, rotationVector, delta)
+		movementVector = Vector3(int(Input.is_action_pressed("move_right"))-int(Input.is_action_pressed("move_left")), 0, int(Input.is_action_pressed("move_backward"))-int(Input.is_action_pressed("move_forward")))
+		rotationVector = Vector3(-mouse_input.y, -mouse_input.x, 0)/5
+		if Input.is_action_pressed("mouse_left"): gunL.shoot(target_enemy)
+		if Input.is_action_pressed("mouse_right"): gunR.shoot(target_enemy)
 
 	
 	mouse_input = Vector2.ZERO
+	engine.process(_delta)
 	update_target_enemy()

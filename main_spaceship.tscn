@@ -194,9 +194,6 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="BoxShape3D" id="1"]
-size = Vector3(0.2, 0.2, 0.1)
-
 [sub_resource type="BoxMesh" id="2"]
 size = Vector3(0.2, 0.2, 0.1)
 
@@ -229,7 +226,7 @@ closed_pose = ExtResource("10_r1c4y")
 margin = 0.12
 radius = 0.06
 
-[node name="RigidBody3D" type="RigidBody3D" unique_id=764400819 node_paths=PackedStringArray("vr_controller", "non_vr_camera", "movement_joystick", "rotation_joystick", "crosshair", "target", "ik", "gunL", "gunR")]
+[node name="RigidBody3D" type="RigidBody3D" unique_id=764400819 node_paths=PackedStringArray("vr_controller", "non_vr_camera", "movement_joystick", "rotation_joystick", "crosshair", "target", "ik", "gunL", "gunR", "engines")]
 collision_layer = 0
 collision_mask = 0
 mass = 10000.0
@@ -241,13 +238,14 @@ non_vr_camera = NodePath("Camera3D")
 movement_joystick = NodePath("MainSpaceship/JoystickMovement/JoystickOrigin/InteractableJoystick")
 rotation_joystick = NodePath("MainSpaceship/JoystickRotation/JoystickOrigin/InteractableJoystick")
 crosshair = NodePath("Crosshair")
-target = NodePath("Guns_Target")
+target = NodePath("IK_targets/Guns_Target")
 ik = NodePath("MainSpaceship/Armature/Skeleton3D/CCDIK3D")
 gunL = NodePath("MainSpaceship/Armature/Skeleton3D/BoneAttachment3D")
 gunR = NodePath("MainSpaceship/Armature/Skeleton3D/BoneAttachment3D2")
+engines = [NodePath("MainSpaceship/Armature/Skeleton3D/BoneAttachment3D_Front"), NodePath("MainSpaceship/Armature/Skeleton3D/BoneAttachment3D_Back"), NodePath("MainSpaceship/Armature/Skeleton3D/BoneAttachment3D_Bottom"), NodePath("MainSpaceship/Armature/Skeleton3D/BoneAttachment3D_3L"), NodePath("MainSpaceship/Armature/Skeleton3D/BoneAttachment3D_3R"), NodePath("MainSpaceship/Armature/Skeleton3D/BoneAttachment3D_2L"), NodePath("MainSpaceship/Armature/Skeleton3D/BoneAttachment3D_2R"), NodePath("MainSpaceship/Armature/Skeleton3D/BoneAttachment3D_1L"), NodePath("MainSpaceship/Armature/Skeleton3D/BoneAttachment3D_1R")]
 
 [node name="PlayerPosition" type="Marker3D" parent="." unique_id=577894436]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 3.007, -2.882)
 
 [node name="VRController" parent="PlayerPosition" unique_id=449353956 instance=ExtResource("2_7ibi4")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.2835303, 0)
@@ -260,11 +258,13 @@ far = 10000.0
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -1.1821707, 2.0247543)
 shape = SubResource("CapsuleShape3D_64hbv")
 
-[node name="Guns_Target" type="Marker3D" parent="." unique_id=914211244]
+[node name="IK_targets" type="Node3D" parent="." unique_id=2103090082]
+
+[node name="Guns_Target" type="Marker3D" parent="IK_targets" unique_id=914211244]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, -100)
 
 [node name="MainSpaceship" type="Node3D" parent="." unique_id=1046053296]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 5.9604645e-08, -3.007347, 2.881538)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
 
 [node name="Armature" type="Node3D" parent="MainSpaceship" unique_id=2095761065]
 
@@ -462,8 +462,8 @@ skeleton = NodePath("..")
 angular_delta_limit = 0.17453292519943295
 deterministic = true
 setting_count = 2
-settings/0/target_node = NodePath("../../../../Guns_Target")
-settings/1/target_node = NodePath("../../../../Guns_Target")
+settings/0/target_node = NodePath("../../../../IK_targets/Guns_Target")
+settings/1/target_node = NodePath("../../../../IK_targets/Guns_Target")
 settings/0/root_bone_name = "Arm.L"
 settings/0/root_bone = 5
 settings/0/end_bone_name = "Gun_Tip.L"
@@ -490,26 +490,66 @@ settings/1/joints/2/rotation_axis = 3
 settings/1/joints/2/limitation = null
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="MainSpaceship/Armature/Skeleton3D" unique_id=1295036482]
-transform = Transform3D(-0.78886884, -0.040641155, -0.6132166, -0.6144871, 0.03661352, 0.7880768, -0.009576266, 0.99850273, -0.05385697, 3.7363248, -0.26670378, 6.504631)
+transform = Transform3D(-0.7924459, -0.041756716, -0.6085114, -0.6092713, 0.0074114217, 0.7929272, -0.028600113, 0.9991003, -0.03131464, 3.7086756, -0.41613472, 6.506782)
 bone_name = "Gun_Tip.L"
 bone_idx = 7
 script = ExtResource("4_7ibi4")
 
 [node name="BoneAttachment3D2" type="BoneAttachment3D" parent="MainSpaceship/Armature/Skeleton3D" unique_id=1348109899]
-transform = Transform3D(-0.805246, 0.016580103, 0.59270954, 0.59265083, 0.053792294, 0.8036617, -0.018558446, 0.9984146, -0.05314235, -3.818431, -0.20838238, 6.503336)
+transform = Transform3D(-0.8180873, 0.009840666, 0.5750104, 0.5750246, 0.029584318, 0.8176014, -0.008965553, 0.9995138, -0.029861426, -3.8054721, -0.35044783, 6.5055285)
 bone_name = "Gun_Tip.R"
 bone_idx = 2
 script = ExtResource("4_7ibi4")
 
+[node name="BoneAttachment3D_Front" type="BoneAttachment3D" parent="MainSpaceship/Armature/Skeleton3D" unique_id=1082466055]
+transform = Transform3D(1, -7.267095e-08, -2.69668e-07, -2.6966802e-07, -0.5024757, -0.86459124, -7.267096e-08, 0.8645913, -0.5024757, 1.7881393e-07, 0.19174445, 2.577084)
+bone_name = "Reactor_Front"
+bone_idx = 17
+
+[node name="BoneAttachment3D_Back" type="BoneAttachment3D" parent="MainSpaceship/Armature/Skeleton3D" unique_id=51394647]
+transform = Transform3D(1, 5.034366e-09, -2.2786302e-09, -2.2786306e-09, 0.75131553, 0.65994316, 5.0343654e-09, -0.65994316, 0.75131553, 2.0976847e-07, 2.7291827, -0.70682687)
+bone_name = "Reactor_Back"
+bone_idx = 15
+
+[node name="BoneAttachment3D_Bottom" type="BoneAttachment3D" parent="MainSpaceship/Armature/Skeleton3D" unique_id=1759557059]
+transform = Transform3D(1, -9.9939e-08, -9.898576e-08, -9.898396e-08, -0.999954, 0.009601688, -9.9940785e-08, -0.009601688, -0.999954, 1.1920929e-07, -1.6735553, 0.7735846)
+bone_name = "Reactor_Bottom"
+bone_idx = 16
+
+[node name="BoneAttachment3D_3L" type="BoneAttachment3D" parent="MainSpaceship/Armature/Skeleton3D" unique_id=440160605]
+transform = Transform3D(0.8416537, 0.51643044, 0.15785651, 0.15785651, -0.51483315, 0.8426318, 0.5164304, -0.6842856, -0.5148331, 1.5748578, -0.69246733, -0.90735847)
+bone_name = "Reactor3.L"
+bone_idx = 13
+
+[node name="BoneAttachment3D_3R" type="BoneAttachment3D" parent="MainSpaceship/Armature/Skeleton3D" unique_id=1029956978]
+transform = Transform3D(0.8416537, -0.51643044, -0.15785651, -0.15785651, -0.51483315, 0.8426318, -0.5164304, -0.6842856, -0.5148331, -1.5748578, -0.69246733, -0.90735847)
+bone_name = "Reactor3.R"
+bone_idx = 14
+
+[node name="BoneAttachment3D_2L" type="BoneAttachment3D" parent="MainSpaceship/Armature/Skeleton3D" unique_id=294713939]
+transform = Transform3D(0.15844142, 0.70557564, 0.6906948, 0.6906948, -0.5790892, 0.43312398, 0.7055756, 0.40843466, -0.57908916, 2.056881, -0.86498296, 1.0693192)
+bone_name = "Reactor2.L"
+bone_idx = 11
+
+[node name="BoneAttachment3D_2R" type="BoneAttachment3D" parent="MainSpaceship/Armature/Skeleton3D" unique_id=976856393]
+transform = Transform3D(0.15844142, -0.70557564, -0.6906948, -0.6906948, -0.5790892, 0.43312398, -0.7055756, 0.40843466, -0.57908916, -2.056881, -0.86498296, 1.0693192)
+bone_name = "Reactor2.R"
+bone_idx = 12
+
+[node name="BoneAttachment3D_1L" type="BoneAttachment3D" parent="MainSpaceship/Armature/Skeleton3D" unique_id=1952561746]
+transform = Transform3D(-0.3238288, -0.7704404, 0.54914135, 0.5491414, 0.3195887, 0.7722088, -0.77044034, 0.5516198, 0.3195888, -1.6272988, 1.9155052, 2.0089839)
+bone_name = "Reactor1.R"
+bone_idx = 10
+
+[node name="BoneAttachment3D_1R" type="BoneAttachment3D" parent="MainSpaceship/Armature/Skeleton3D" unique_id=2078387899]
+transform = Transform3D(-0.3238288, -0.7704404, 0.54914135, 0.5491414, 0.3195887, 0.7722088, -0.77044034, 0.5516198, 0.3195888, -1.6272988, 1.9155052, 2.0089839)
+bone_name = "Reactor1.R"
+bone_idx = 10
+
 [node name="JoystickMovement" type="Node3D" parent="MainSpaceship" unique_id=1836498629]
 transform = Transform3D(-0.7, 6.119594e-08, 2.6749595e-15, 0, -3.059797e-08, 0.7, 6.119594e-08, 0.7, 3.059797e-08, 0.34824976, 2.7656171, 3.2411132)
 
-[node name="Frame" type="StaticBody3D" parent="MainSpaceship/JoystickMovement" unique_id=729395336]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MainSpaceship/JoystickMovement/Frame" unique_id=1672682669]
-shape = SubResource("1")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MainSpaceship/JoystickMovement/Frame" unique_id=787878004]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MainSpaceship/JoystickMovement" unique_id=787878004]
 mesh = SubResource("2")
 
 [node name="JoystickOrigin" type="Node3D" parent="MainSpaceship/JoystickMovement" unique_id=1537042219]
@@ -567,12 +607,7 @@ target = NodePath("../../../JoystickBody/HandleMesh/GrabPointHandRight")
 [node name="JoystickRotation" type="Node3D" parent="MainSpaceship" unique_id=1890490202]
 transform = Transform3D(-0.7, 6.119594e-08, 2.6749595e-15, 0, -3.059797e-08, 0.7, 6.119594e-08, 0.7, 3.059797e-08, -0.35571188, 2.7656171, 3.2411132)
 
-[node name="Frame" type="StaticBody3D" parent="MainSpaceship/JoystickRotation" unique_id=1550006144]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MainSpaceship/JoystickRotation/Frame" unique_id=1424121036]
-shape = SubResource("1")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MainSpaceship/JoystickRotation/Frame" unique_id=1045109146]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MainSpaceship/JoystickRotation" unique_id=1045109146]
 mesh = SubResource("2")
 
 [node name="JoystickOrigin" type="Node3D" parent="MainSpaceship/JoystickRotation" unique_id=72654534]
